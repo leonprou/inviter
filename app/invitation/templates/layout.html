@@ -1,6 +1,8 @@
-<title>Simple Page Blueprint</title>
-<div class="page">
-  <h1>Wedding</h1>
-  {% block body %}{% endblock %}
-</div>
+{% extends "root.html" %}
+{% block body %}
+<div class="page" dir="rtl">
 
+  	<h1>מסיבת החתונה של לרה ולאון</h1>
+  	{% block content %}{% endblock %}
+</div>
+{% endblock %}

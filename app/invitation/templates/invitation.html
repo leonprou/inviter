@@ -1,22 +1,25 @@
 {% extends "layout.html" %}
 
-{% block body %}
-<form method='POST'>
+{% block content %}
+<form method='POST' dir="rtl">
 	<div> 	 הזמנה לכבוד {{name}}</div>
-	<div>
-		<input type="radio" name="status" value="accepted" checked> מגיע<br>
+	<div class="input">
+		<div>
+			<input {{"checked" if status == 'accepted' else None}} type="radio" name="status" value="accepted" checked> מגיע<br>
+		</div>
+		<div>
+			<input {{"checked" if status == 'declined' else None}} type="radio" name="status" value="declined">לא מגיע<br>
+		</div>
 	</div>
-	<div>
-		<input type="radio" name="status" value="declined">לא מגיע<br>
-	</div>
-	<div>
+	<div class="input">
+		<span>:מגיע בזוג או פרד</span>
 		<select name="number_of_guests">
 		{% for i in range(1, max_number_of_guests + 1) %}
-			<option value={{i}}>{{i}}</option>
+			<option {{"selected" if i == number_of_guests}}  value={{i}}>{{i}}</option>
 		{% endfor %}
 		</select>
 	</div>
-	<button type="submit">Submit</button>
+	<button type="submit">שלח</button>
 </form>
 {% endblock %}
 ~                         
