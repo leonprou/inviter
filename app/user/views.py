@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, abort, request
 from jinja2 import TemplateNotFound
-from flask.ext.principal import Permission, RoleNeed
 from app.database import Invitation, db
 from app.permissions import admin_permission
 

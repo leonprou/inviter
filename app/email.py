@@ -20,10 +20,10 @@ def connect():
     return server
 
 
-def send_email(subject, text, recepient, server=None):
-    logger.info('Sending email {subject}. body: {text}'.format(
-        subject=subject, text=text))
-    if not get_debug_flag():
+def send_email(subject, text, recepient, debug_mode=False, server=None):
+    logger.info('Sending email in {mode} mode. {subject}. body: {text}'.format(
+        mode='DEV' if debug_mode else 'PROD', subject=subject, text=text))
+    if not debug_mode:
         if not server:
             server = connect()
         msg = MIMEText(text)

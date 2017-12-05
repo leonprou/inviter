@@ -1,8 +1,9 @@
 from flask import Flask
-from app.settings import ProdConfig
+from app.settings import ProdConfig, LOGGING
 from app.extensions import db, migrate, principal
 from .exceptions import register_errorhandlers
 from app import invitation, user
+import logging.config
 
 def create_app(config_object=ProdConfig):
     app = Flask(__name__.split('.')[0])
@@ -11,6 +12,7 @@ def create_app(config_object=ProdConfig):
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
+    logging.config.dictConfig(LOGGING)
     return app
 
 

@@ -1,10 +1,11 @@
 import os
 from datetime import timedelta
+import secret
 
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('INVITATION_SECRET', 'secret-key')  # TODO: Change me
+    SECRET_KEY = os.environ.get('SECRET_KEY', secret.SECRET_KEY)  # TODO: Change me
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
@@ -47,3 +48,39 @@ class DevConfig(Config):
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
 
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(message)s [%(funcName)s in %(filename)s]'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': 'error.log',
+            'formatter': 'simple'
+        }
+    },
+    'loggers': {
+        'app': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG'
+        }
+    }
+}
+
+def setup():
+    logging.config.dictConfig(LOGGING)
