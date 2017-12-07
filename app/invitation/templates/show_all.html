@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Status</th>
+			<th># of Guests</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for invitation in invitations %}
+		<tr onclick="document.location = '{{url_for('invitation.show', invitation_id=invitation.id)}}';">
+				<td>{{invitation.name}}</td>
+				<td>{{invitation.status}}</td>
+				<td>{{invitation.number_of_guests}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>total</td>
+			<td>accepted</td>
+			<td>{{total_guests}}</td>
+		</tr>
+	</tfoot>
+</table>
+{% endblock %}
+~                         

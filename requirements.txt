@@ -1,5 +1,4 @@
 flask==0.12.1
 flask-sqlalchemy==2.2
 flask-migrate==2.0.3
-flask-principal==0.4.0
-flask-jwt==0.3.2
+https://github.com/mattupstate/flask-security/archive/develop.zip

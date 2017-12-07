@@ -1,4 +1,4 @@
-from app.database import db, Invitation
+from app.database import db, Invitation, User
 from csv import DictReader
 
 def upload_csv(filename):
@@ -7,11 +7,18 @@ def upload_csv(filename):
     reader = DictReader(f, fieldnames=fieldnames)
     next(reader)
     next(reader)
-    for row in reader:                          
-        del row[None]
-        invitation = Invitation(**row)
-        db.session.add(invitation)
-    db.session.commit()
+    try:
+        for row in reader:                          
+            del row[None]
+            user = User(email=row['email'])
+            del row['email']
+            invitation = Invitation(**row, user=user)
+            db.session.add(user)
+            db.session.add(invitation)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        raise e
 
 def main():
     filename = '/Users/leonprouger/data/wedding/invitations.csv'

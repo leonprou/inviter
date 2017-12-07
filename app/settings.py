@@ -6,6 +6,13 @@ class Config(object):
     """Base configuration."""
 
     SECRET_KEY = os.environ.get('SECRET_KEY', secret.SECRET_KEY)  # TODO: Change me
+    SECURITY_PASSWORDLESS = True
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = False
+    MAIL_USERNAME = 'deeptrade1@gmail.com'
+    MAIL_PASSWORD = secret.EMAIL_PASSWORD
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
