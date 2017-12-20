@@ -6,7 +6,6 @@ from .exceptions import register_errorhandlers
 from .permissions import setup_permissions
 from app import invitation, user
 import logging.config
-from flask_jwt import JWT
 
 def create_app(config_object=ProdConfig):
     app = Flask(__name__.split('.')[0])
