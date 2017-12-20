@@ -5,7 +5,7 @@ from app.permissions import admin_permission
 from flask import current_app
 from flask_login import current_user
 from flask_principal import  Permission, RoleNeed
-
+from flask_security.passwordless import send_login_instructions
 
 admin_permission = Permission(RoleNeed('admin'))
 
@@ -46,3 +46,14 @@ def show_all():
     replied_invitations = [invitation for invitation in invitations if invitation.status is not None]
     total_guests = sum([invitation.number_of_guests for invitation in invitations if invitation.status == 'accepted'])
     return render_template('show_all.html', invitations=invitations, total_replied_invitations=len(replied_invitations), total_guests=total_guests)
+
+
+
+@blueprint.route('/invite')
+@admin_permission.require()
+def invite():
+    invitations = Invitation.query.filter_by(status=None).all()
+    for invitation in invitations:
+        print('send email to {}'.format(invitation.name))
+        send_login_instructions(invitation.user)
+    return render_template('success.html')

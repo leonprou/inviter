@@ -101,3 +101,22 @@ margin-top: 5% }
     margin: 12px 4px 2px 2px;
     cursor: pointer;
 }
+
+.navigation-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navigation-item {
+    float: left;
+}
+
+.navigation-item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
