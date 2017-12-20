@@ -1,11 +1,10 @@
 import os
 from datetime import timedelta
-import secret
 
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('SECRET_KEY', secret.SECRET_KEY)
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     SECURITY_EMAIL_SUBJECT_PASSWORDLESS = 'הזמנה לחתונה'
     SECURITY_PASSWORDLESS = True
     MAIL_SERVER = 'smtp.gmail.com'
@@ -13,7 +12,7 @@ class Config(object):
     MAIL_USE_TLS = False
     MAIL_USE_SSL = False
     MAIL_USERNAME = 'leraleonwedding@gmail.com'
-    MAIL_PASSWORD = secret.EMAIL_PASSWORD
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
