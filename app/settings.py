@@ -39,10 +39,7 @@ class ProdConfig(Config):
 
     ENV = 'prod'
     DEBUG = False
-    DB_NAME = 'inviter.db'
-    # Put the db file in project root
-    DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
+    SQLALCHEMY_DATABASE_URI = 'postgresql:///inviterdb'
 
 
 class DevConfig(Config):
@@ -53,7 +50,7 @@ class DevConfig(Config):
     DB_NAME = 'inviter.db'
     # Put the db file in project root
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = 'postgresql:///invitedb'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
 
 
 
