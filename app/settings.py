@@ -5,7 +5,8 @@ import secret
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('SECRET_KEY', secret.SECRET_KEY)  # TODO: Change me
+    SECRET_KEY = os.environ.get('SECRET_KEY', secret.SECRET_KEY)
+    SECURITY_EMAIL_SUBJECT_PASSWORDLESS = 'הזמנה לחתונה'
     SECURITY_PASSWORDLESS = True
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587

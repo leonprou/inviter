@@ -12,7 +12,6 @@ blueprint = Blueprint('user', __name__,
 @blueprint.route('/')
 @login_required
 def index():
-    current_app.logger.info(current_user.email)
     if current_user.has_role('admin'):
         return redirect(url_for('invitation.show_all'))
     else:

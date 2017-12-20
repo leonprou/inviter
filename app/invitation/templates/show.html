@@ -12,14 +12,14 @@
 		</div>
 	</div>
 	<div class="input">
-		<span>:מגיע בזוג או פרד</span>
+		<span>מגיע בזוג או פרד</span>
 		<select name="number_of_guests">
-		{% for i in range(1, max_number_of_guests + 1) %}
+		{% for i in range(1, 3) %}
 			<option {{"selected" if i == number_of_guests}}  value={{i}}>{{i}}</option>
 		{% endfor %}
 		</select>
 	</div>
 	<input type="hidden" value="{{id}}" name="invitation_id" />
-	<button type="submit">שלח</button>
+	<button class="button" type="submit">שלח</button>
 </form>
 {% endblock %}

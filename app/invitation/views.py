@@ -33,13 +33,16 @@ def update(invitation_id):
     invitation.number_of_guests = request.form['number_of_guests']
     db.session.add(invitation)
     db.session.commit()
-    return render_template('success.html')
+    if invitation.status == 'accepted':
+        return render_template('going.html')
+    else:
+        return render_template('not_going.html')
 
 
 @blueprint.route('/')
 @admin_permission.require()
 def show_all():
-    print('HA')
     invitations = Invitation.query.all()
-    total_guests = sum([invitation.number_of_guests if invitation.status == 'accepted' else 0 for invitation in invitations])
-    return render_template('show_all.html', invitations=invitations, total_guests=total_guests)
+    replied_invitations = [invitation for invitation in invitations if invitation.status is not None]
+    total_guests = sum([invitation.number_of_guests for invitation in invitations if invitation.status == 'accepted'])
+    return render_template('show_all.html', invitations=invitations, total_replied_invitations=len(replied_invitations), total_guests=total_guests)
