@@ -3,3 +3,4 @@ flask-sqlalchemy==2.2
 flask-migrate==2.0.3
 https://github.com/mattupstate/flask-security/archive/develop.zip
 gunicorn==19.7.1
+psycopg2==2.7.3.2
