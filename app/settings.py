@@ -12,7 +12,7 @@ class Config(object):
     MAIL_PORT = 587
     MAIL_USE_TLS = False
     MAIL_USE_SSL = False
-    MAIL_USERNAME = 'deeptrade1@gmail.com'
+    MAIL_USERNAME = 'leraleonwedding@gmail.com'
     MAIL_PASSWORD = secret.EMAIL_PASSWORD
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
