@@ -1,7 +1,6 @@
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_principal import Principal
-from flask_jwt import JWT
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_mail import Mail, Connection
 from .database import db
@@ -26,7 +25,6 @@ def configure_host(self):
     
 migrate = Migrate()
 principal = Principal()
-jwt = JWT()
 security = Security()
 mail = Mail()
 
