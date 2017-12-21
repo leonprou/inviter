@@ -107,4 +107,5 @@ venv.bak/
 
 *.db
 
-secret.py
+setup.dev.sh
+setup.prod.sh
