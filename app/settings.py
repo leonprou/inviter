@@ -31,7 +31,7 @@ class Config(object):
         'http://0.0.0.0:4000',
         'http://localhost:4000',
     ]
-    SERVER_NAME = 'localhost:5000'
+    #SERVER_NAME = 'localhost:5000'
 
 
 class ProdConfig(Config):

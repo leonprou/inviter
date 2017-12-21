@@ -7,6 +7,27 @@ from .permissions import setup_permissions
 from app import invitation, user
 import logging.config
 
+
+
+
+from flask import Flask
+from datetime import datetime
+
+def create_app2(*args):
+    app = Flask(__name__)
+
+
+    @app.route('/')
+    def homepage():
+        the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+
+        return """
+        <h1>Hello heroku</h1>
+        <p>It is currently {time}.</p>
+        <img src="http://loremflickr.com/600/400" />
+        """.format(time=the_time)
+    return app
+
 def create_app(config_object=ProdConfig):
     app = Flask(__name__.split('.')[0])
     app.url_map.strict_slashes = False
