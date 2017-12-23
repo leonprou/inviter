@@ -33,7 +33,6 @@ h2 {
 	text-align: center;
 	color: white;
 	width: 35em;
-	padding: 0.8em;
 	background: rgba(234, 222, 199, 0.5);
 	background: radial-gradient(circle, rgba(234, 222, 199, 0.5), rgba(255,0,0,0))
 }
@@ -44,7 +43,6 @@ h2 {
 		text-align: center;
 		color: white;
 		width: 100%;
-		padding: 0.8em;
 		background: rgba(234, 222, 199, 0.5);
 		background: radial-gradient(circle, rgba(234, 222, 199, 0.5), rgba(255,0,0,0))
 	}
