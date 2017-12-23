@@ -9,6 +9,7 @@ from app.permissions import admin_permission
 from csv import DictReader
 from werkzeug.wsgi import make_line_iter
 import io
+import codecs
 
 admin_permission = Permission(RoleNeed('admin'))
 
@@ -66,8 +67,7 @@ def invite():
 def upload():
     if request.method == 'POST':
         file = request.files['file']
-        file.stream.fileno()
-        upload_csv(io.TextIOWrapper(file.stream))
+        upload_csv(codecs.getreader("utf-8")(file.stream))
         return redirect(url_for('invitation.show_all'))
     else:
         return render_template('upload.html')
