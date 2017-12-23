@@ -66,8 +66,8 @@ def invite():
 def upload():
     if request.method == 'POST':
         file = request.files['file']
-        stream = file.stream.fileno()
-        upload_csv(io.TextIOWrapper(stream))
+        file.stream.fileno()
+        upload_csv(io.TextIOWrapper(file.stream))
         return redirect(url_for('invitation.show_all'))
     else:
         return render_template('upload.html')
