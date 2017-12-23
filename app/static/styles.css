@@ -4,8 +4,10 @@ html {
 }
 
 body {
+	width: 100%;
+	height: 100%;
 	font-family: sans-serif;
-	background: url("wedding.jpg") no-repeat bottom fixed; 
+	background: url("background.jpg") no-repeat bottom fixed; 
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -33,7 +35,20 @@ h2 {
 	width: 35em;
 	padding: 0.8em;
 	background: rgba(234, 222, 199, 0.5);
-	background: radial-gradient(circle, rgba(234, 222, 199, 0.5), rgba(255,0,0,0))}
+	background: radial-gradient(circle, rgba(234, 222, 199, 0.5), rgba(255,0,0,0))
+}
+
+@media (max-width: 1000px) {
+	.page {
+		margin: 2em auto;
+		text-align: center;
+		color: white;
+		width: 100%;
+		padding: 0.8em;
+		background: rgba(234, 222, 199, 0.5);
+		background: radial-gradient(circle, rgba(234, 222, 199, 0.5), rgba(255,0,0,0))
+	}
+}
 
 .invitation-header {
 	padding-bottom: 10px;
