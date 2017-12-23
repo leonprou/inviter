@@ -10,6 +10,7 @@
 			<li class="navigation-item"><a href="{{ url_for('security.logout') }}">Logout</a></li>
 			{% if current_user.has_role('admin') %}
 			<li class="navigation-item"><a href="{{ url_for('invitation.show_all') }}">View</a></li>
+			<li class="navigation-item"><a href="{{ url_for('invitation.upload') }}">Upload</a></li>
 			{% endif %}
 			{% else %}
 				<li class="navigation-item"><a href="{{ url_for('security.login') }}">Login</a></li>

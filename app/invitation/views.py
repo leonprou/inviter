@@ -1,11 +1,14 @@
-from flask import Blueprint, render_template, abort, request
+from flask import Blueprint, render_template, abort, request, current_app, redirect, url_for
 from jinja2 import TemplateNotFound
-from app.database import Invitation, db
-from app.permissions import admin_permission
-from flask import current_app
 from flask_login import current_user
 from flask_principal import  Permission, RoleNeed
 from flask_security.passwordless import send_login_instructions
+from werkzeug.utils import secure_filename
+from app.database import Invitation, User, db
+from app.permissions import admin_permission
+from csv import DictReader
+from werkzeug.wsgi import make_line_iter
+import io
 
 admin_permission = Permission(RoleNeed('admin'))
 
@@ -54,6 +57,36 @@ def show_all():
 def invite():
     invitations = Invitation.query.filter_by(status=None).all()
     for invitation in invitations:
-        print('send email to {}'.format(invitation.name))
         send_login_instructions(invitation.user)
     return render_template('success.html')
+
+
+@blueprint.route('/upload', methods=['GET', 'POST'])
+@admin_permission.require()
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        upload_csv(io.TextIOWrapper(file.stream))
+        return redirect(url_for('invitation.show_all'))
+    else:
+        return render_template('upload.html')
+
+
+def upload_csv(stream):
+    fieldnames = ('name', 'number_of_guests', 'related_to', 'group', 'phone_number', None, 'email')
+    reader = DictReader(stream, fieldnames=fieldnames)
+    next(reader)
+    next(reader)
+    try:
+        for row in reader:                      
+            del row[None]
+            user = User(email=row['email'])
+            del row['email']
+            invitation = Invitation(**row, user=user)
+            db.session.add(user)
+            db.session.add(invitation)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        raise e
+

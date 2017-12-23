@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+ <div>
+	 <div>
+		 <label for="file">Choose csv file to upload invitations</label>
+	 </div>
+   <input type="file" id="file" name="file" accept=".csv" multiple>
+ </div>
+ <div>
+   <button>Submit</button>
+ </div>
+</form>
+{% endblock %}
+
