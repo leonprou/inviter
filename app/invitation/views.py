@@ -79,7 +79,9 @@ def upload_csv(stream):
     next(reader)
     next(reader)
     try:
-        for row in reader:                      
+        for row in reader:
+            if not row.get('email'):
+                continue
             del row[None]
             user = User(email=row['email'])
             del row['email']
