@@ -9,7 +9,7 @@ class Invitation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False
     )
     user = db.relationship('User', back_populates='invitation')
-    name = db.Column(db.String(160), nullable=False, unique=True)
+    name = db.Column(db.String(160), nullable=False)
     number_of_guests = db.Column(db.Integer, default=0)
     max_number_of_guests = db.Column(db.Integer, default=2)
     related_to = db.Column(db.String(80), nullable=False)
