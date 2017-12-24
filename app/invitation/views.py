@@ -47,9 +47,13 @@ def update(invitation_id):
 @admin_permission.require()
 def show_all():
     invitations = Invitation.query.all()
-    replied_invitations = [invitation for invitation in invitations if invitation.status is not None]
-    total_guests = sum([invitation.number_of_guests for invitation in invitations if invitation.status == 'accepted'])
-    return render_template('show_all.html', invitations=invitations, total_replied_invitations=len(replied_invitations), total_guests=total_guests)
+    total_invitations= len([invitation for invitation in invitations])
+    print(total_invitations)
+    total_invitations_accepted = len([invitation for invitation in invitations if invitation.status == 'accepted'])
+    print(total_invitations_accepted)
+    total_guests = sum([invitation.number_of_guests for invitation in invitations])
+    total_guests_accepted = sum([invitation.number_of_guests for invitation in invitations if invitation.status == 'accepted'])
+    return render_template('show_all.html', invitations=invitations, total_invitations=total_invitations, total_invitations_accepted=total_invitations_accepted, total_guests=total_guests, total_guests_accepted=total_guests_accepted)
 
 
 
