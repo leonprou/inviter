@@ -53,10 +53,15 @@ def show_all():
 
 
 
-@blueprint.route('/invite')
+@blueprint.route('/invite', methods=['GET', 'POST'])
 @admin_permission.require()
 def invite():
-    invitations = Invitation.query.filter_by(status=None).all()
+    if request.method == 'GET':
+        invitations = Invitation.query.filter_by(status=None).all()
+    else:
+        emails = list(request.form.keys())
+        users = User.query.filter(User.email.in_(emails)).all()
+        invitations = [u.invitation for u in users]
     for invitation in invitations:
         send_login_instructions(invitation.user)
     return render_template('success.html')

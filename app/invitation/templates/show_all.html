@@ -1,34 +1,38 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Status</th>
-			<th>Guests</th>
-			<th>Invitations</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for invitation in invitations %}
-		<tr class="invitation-row" onclick="document.location = '{{url_for('invitation.show', invitation_id=invitation.id)}}';">
-				<td>{{invitation.name}}</td>
-				<th>{{invitation.user.email}}</td>
-				<td>{{invitation.status}}</td>
-				<td>{{invitation.number_of_guests}}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-	<tfoot>
-		<tr>
-			<td>total</td>
-			<td></td>
-			<td>{{total_guests}}</td>
-			<td>{{total_replied_invitations}}</td>
-		</tr>
-	</tfoot>
-</table>
+<form action="{{url_for('invitation.invite')}}" method="post">
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Status</th>
+				<th>Guests</th>
+				<th>Invite</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for invitation in invitations %}
+			<tr class="invitation-row" onclick="document.location = '{{url_for('invitation.show', invitation_id=invitation.id)}}';">
+					<td>{{invitation.name}}</td>
+					<th>{{invitation.user.email}}</td>
+					<td>{{invitation.status}}</td>
+					<td>{{invitation.number_of_guests}}</td>
+					<td><input onclick="event.stopPropagation()" type="checkbox" name="{{invitation.user.email}}" value=true></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>total</td>
+				<td></td>
+				<td>{{total_guests}}</td>
+				<td>{{total_replied_invitations}}</td>
+				<td><input type="submit" value="Invite"></td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
 {% endblock %}
 ~                         
