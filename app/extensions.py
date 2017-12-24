@@ -12,8 +12,7 @@ def configure_host(self):
     else:
         host = smtplib.SMTP(self.mail.server, self.mail.port)
     
-    host.ehlo()
-    host.starttls()
+    host.ehlo_or_helo_if_needed()
     host.set_debuglevel(int(self.mail.debug))
 
     if self.mail.use_tls:

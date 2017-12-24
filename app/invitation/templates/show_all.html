@@ -5,6 +5,7 @@
 	<thead>
 		<tr>
 			<th>Name</th>
+			<th>Email</th>
 			<th>Status</th>
 			<th>Guests</th>
 			<th>Invitations</th>
@@ -14,6 +15,7 @@
 		{% for invitation in invitations %}
 		<tr class="invitation-row" onclick="document.location = '{{url_for('invitation.show', invitation_id=invitation.id)}}';">
 				<td>{{invitation.name}}</td>
+				<th>{{invitation.user.email}}</td>
 				<td>{{invitation.status}}</td>
 				<td>{{invitation.number_of_guests}}</td>
 		</tr>
