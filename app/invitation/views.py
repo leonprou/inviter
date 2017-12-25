@@ -33,6 +33,8 @@ def update(invitation_id):
     invitation = current_user.invitation
     if current_user.has_role('admin') or invitation.id == invitation_id:
         invitation = invitation or Invitation.query.get(invitation_id)
+    if int(request.form['number_of_guests']) > invitation.max_number_of_guests:
+        return render_template('failed.html')
     invitation.status = request.form['status']
     invitation.number_of_guests = request.form['number_of_guests']
     db.session.add(invitation)
@@ -48,9 +50,7 @@ def update(invitation_id):
 def show_all():
     invitations = Invitation.query.all()
     total_invitations= len([invitation for invitation in invitations])
-    print(total_invitations)
     total_invitations_accepted = len([invitation for invitation in invitations if invitation.status == 'accepted'])
-    print(total_invitations_accepted)
     total_guests = sum([invitation.number_of_guests for invitation in invitations])
     total_guests_accepted = sum([invitation.number_of_guests for invitation in invitations if invitation.status == 'accepted'])
     return render_template('show_all.html', invitations=invitations, total_invitations=total_invitations, total_invitations_accepted=total_invitations_accepted, total_guests=total_guests, total_guests_accepted=total_guests_accepted)
